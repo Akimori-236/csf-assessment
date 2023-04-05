@@ -1,0 +1,24 @@
+<div>
+  <h1>Search Movie Reviews</h1>
+  <form [formGroup]="searchForm">
+    <div class="">
+      <label class="m-2" for="movieNameID"> Movie Name: </label>
+      <input
+        class="m-2"
+        type="text"
+        name="movieName"
+        id="movieNameID"
+        formControlName="movieName"
+      />
+    </div>
+    <div>
+      <button
+        class="btn btn-outline-primary"
+        type="submit"
+        [disabled]="searchForm.invalid"
+      >
+        Search
+      </button>
+    </div>
+  </form>
+</div>
