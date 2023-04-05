@@ -11,9 +11,10 @@ public class MyUtils {
                 .add("byline", r.getByline())
                 .add("headline", r.getHeadline())
                 .add("rating", r.getRating())
-                .add("url", r.getReviewURL())
+                .add("reviewURL", r.getReviewURL())
                 .add("summary", r.getSummary())
-                .add("title", r.getTitle());
+                .add("title", r.getTitle())
+                .add("commentCount" ,r.getCommentCount());
         if (r.getImage() != null) {
             job.add("image", r.getImage());
         }

@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ibf2022.batch1.csf.assessment.server.models.Review;
 import ibf2022.batch1.csf.assessment.server.services.MovieService;
 import ibf2022.batch1.csf.assessment.server.utils.MyUtils;
-import jakarta.json.Json;
-import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
-import jakarta.json.JsonObjectBuilder;
 
 @RestController
 @CrossOrigin(origins = "*")

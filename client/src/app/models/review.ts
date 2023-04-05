@@ -6,4 +6,5 @@ export interface Review {
     summary: string
     reviewURL: string
     image: string | null
+    commentCount: number
 }

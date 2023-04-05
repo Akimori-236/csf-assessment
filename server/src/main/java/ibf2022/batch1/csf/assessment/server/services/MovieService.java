@@ -4,6 +4,7 @@ import java.io.StringReader;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import ibf2022.batch1.csf.assessment.server.models.Review;
+import ibf2022.batch1.csf.assessment.server.repositories.MovieRepository;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
@@ -24,6 +26,9 @@ public class MovieService {
 
 	@Value("${api.key}")
 	private String privateKey;
+
+	@Autowired
+	private MovieRepository movieRepo;
 
 	// TODO: Task 4
 	// DO NOT CHANGE THE METHOD'S SIGNATURE
@@ -75,6 +80,8 @@ public class MovieService {
 		if (!jObj.isNull("multimedia")) {
 			r.setImage(jObj.getJsonObject("multimedia").getString("src"));
 		}
+		// retrieve comment count (Task 5)
+		r.setCommentCount(movieRepo.countComments(r.getTitle()));
 		return r;
 	}
 }
