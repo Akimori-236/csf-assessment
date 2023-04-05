@@ -1,6 +1,6 @@
-<div>
+<div class="container">
   <h1>Search Movie Reviews</h1>
-  <form [formGroup]="searchForm" (ngSubmit)="search()">
+  <form class="form" [formGroup]="searchForm" (ngSubmit)="search()">
     <div class="">
       <label class="m-2" for="movieNameID"> Movie Name: </label>
       <input
@@ -11,7 +11,7 @@
         formControlName="movieName"
       />
     </div>
-    <div>
+    <div class="text-end">
       <button
         class="btn btn-outline-primary"
         type="submit"

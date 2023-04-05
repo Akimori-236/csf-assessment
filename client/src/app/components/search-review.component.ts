@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, FormControl, ValidationErrors, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './search-review.component.html',
   styleUrls: ['./search-review.component.css']
 })
-export class SearchReviewComponent {
+export class SearchReviewComponent implements OnInit{
   searchForm!: FormGroup
 
   constructor(
@@ -16,9 +16,18 @@ export class SearchReviewComponent {
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
-      movieName: this.fb.control<string>('', [Validators.required, Validators.minLength(2)]),
+      movieName: this.fb.control<string>('', [Validators.required, this.minCharacterValidator(2)]),
     })
   }
+
+  // Custom Validator creation
+  minCharacterValidator(min: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const searchTerm = control.value.trim()
+      return searchTerm.length >= min ? null : { 'InsufficientCharacters': true }
+    }
+  }
+
 
   search() {
     const movieName = this.searchForm.value['movieName']

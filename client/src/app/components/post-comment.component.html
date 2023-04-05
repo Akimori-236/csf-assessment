@@ -1,1 +1,72 @@
-<p>post-comment works!</p>
+<div class="container col-md-6">
+  <h1>Post comment for {{ selectedTitle }}</h1>
+  <form class="form" [formGroup]="commentForm" (ngSubmit)="postComment()">
+    <table>
+      <tbody>
+        <tr>
+          <td class="text-end">
+            <label class="form-label m-2" for="nameID">Name: </label>
+          </td>
+          <td>
+            <input
+              class="form-control m-2"
+              type="text"
+              name="name"
+              id="nameID"
+              formControlName="name"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td class="text-end">
+            <label class="form-label m-2" for="ratingID">Rating: </label>
+          </td>
+          <td>
+            <input
+              class="form-control m-2"
+              type="number"
+              name="rating"
+              id="ratingID"
+              min="1"
+              max="5"
+              formControlName="rating"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label class="form-label m-2" for="commentID">Comment:</label>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <textarea
+              class="form-control"
+              name="comment"
+              id="commentID"
+              cols="30"
+              rows="5"
+              formControlName="comment"
+            ></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button class="btn btn-dark m-2" type="button" (click)="back()">
+              Back
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-primary m-2"
+              type="button"
+              [disabled]="commentForm.invalid"
+            >
+              Post
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

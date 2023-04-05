@@ -1,27 +1,49 @@
-<div>
+<div class="container">
   <div class="row">
     <h1 class="col">Search Result</h1>
     <button
-      class="col-1 ms-auto btn btn-outline-danger"
+      class="col-md-1 ms-auto btn btn-danger"
       type="button"
       [routerLink]="['/']"
     >
       Back
     </button>
   </div>
-  <div class="row" *ngFor="let review of reviewList">
-    <img class="col-3" src="{{ review.image }}" />
-    <div class="col-9">
-      <h2>
-        <a href="{{ review.reviewURL }}">{{ review.title }} </a
-        ><span class="badge text-bg-danger">{{ review.rating }}</span>
-      </h2>
-      <h3>{{ review.headline }}</h3>
-      <h5>{{ review.summary }}</h5>
-      <p>Comments: {{ review.commentCount }}</p>
-      <button class="ms-auto btn btn-outline-primary" type="button">
-        Comment
-      </button>
+
+  <div *ngIf="reviewList.length == 0">
+    <h4>Your search produced no results</h4>
+  </div>
+  <!-- <div *ngIf="reviewList">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div> -->
+  <div *ngIf="reviewList.length > 0">
+    <div class="row" *ngFor="let review of reviewList">
+      <img
+        class="col-md-3"
+        src="{{ review.image }}"
+        (error)="onImgError($event)"
+      />
+      <div class="col-md-9">
+        <h2>
+          <a href="{{ review.reviewURL }}" target="_blank">{{
+            review.title
+          }}</a>
+          <span class="ms-auto badge text-bg-danger">{{ review.rating }}</span>
+        </h2>
+        <h3>{{ review.headline }}</h3>
+        <h5>{{ review.summary }}</h5>
+        <p>Comments: {{ review.commentCount }}</p>
+        <button
+          class="ms-auto btn btn-outline-primary"
+          type="button"
+          [routerLink]="['/comment']"
+          [queryParams]="{ title: review.title, searchTerm }"
+        >
+          Comment
+        </button>
+      </div>
     </div>
   </div>
 </div>
