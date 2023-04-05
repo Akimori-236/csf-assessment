@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container col-md-4 mt-5">
   <h1>Search Movie Reviews</h1>
   <form class="form" [formGroup]="searchForm" (ngSubmit)="search()">
     <div class="">
@@ -13,7 +13,7 @@
     </div>
     <div class="text-end">
       <button
-        class="btn btn-outline-primary"
+        class="btn btn-primary"
         type="submit"
         [disabled]="searchForm.invalid"
       >

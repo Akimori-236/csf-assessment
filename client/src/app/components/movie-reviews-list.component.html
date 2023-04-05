@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-3">
   <div class="row">
     <h1 class="col">Search Result</h1>
     <button
@@ -25,18 +25,21 @@
         src="{{ review.image }}"
         (error)="onImgError($event)"
       />
+
+      <!-- DATA -->
       <div class="col-md-9">
-        <h2>
-          <a href="{{ review.reviewURL }}" target="_blank">{{
-            review.title
-          }}</a>
-          <span class="ms-auto badge text-bg-danger">{{ review.rating }}</span>
-        </h2>
-        <h3>{{ review.headline }}</h3>
-        <h5>{{ review.summary }}</h5>
-        <p>Comments: {{ review.commentCount }}</p>
+        <div class="row row-cols-lg-auto">
+          <a class="col-12" href="{{ review.reviewURL }}" target="_blank">
+            <h2>{{ review.title }}</h2>
+          </a>
+          <span class="col-12 my-auto badge text-bg-danger">{{ review.rating }}</span>
+        </div>
+
+        <h3 class="row">{{ review.headline }}</h3>
+        <h5 class="row">{{ review.summary }}</h5>
+        <p class="row">Comments: {{ review.commentCount }}</p>
         <button
-          class="ms-auto btn btn-outline-primary"
+          class="row ms-auto btn btn-outline-primary"
           type="button"
           [routerLink]="['/comment']"
           [queryParams]="{ title: review.title, searchTerm }"
