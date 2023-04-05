@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 
-const SPRINGBOOT_URL = "/api/something"
+const SPRINGBOOT_URL = "/api/search"
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,9 @@ export class SpringbootDataService {
 
   constructor(private http: HttpClient) { }
 
-  getSB(): Promise<any> {
+  search(movieName: string): Promise<any> {
     let params = new HttpParams()
+      .set("query", movieName)
 
     // send to springboot
     return lastValueFrom(

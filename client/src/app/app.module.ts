@@ -5,12 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { SearchReviewComponent } from './components/search-review.component'
+import { SearchReviewComponent } from './components/search-review.component';
+import { MovieReviewsListComponent } from './components/movie-reviews-list.component';
+import { PostCommentComponent } from './components/post-comment.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchReviewComponent,
+    MovieReviewsListComponent,
+    PostCommentComponent,
   ],
   imports: [
     BrowserModule,
