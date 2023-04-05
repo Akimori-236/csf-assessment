@@ -11,7 +11,7 @@ export class SpringbootDataService {
 
   constructor(private http: HttpClient) { }
 
-  search(movieName: string): Promise<any> {
+  search(movieName: string): Promise<string> {
     let params = new HttpParams()
       .set("query", movieName)
 

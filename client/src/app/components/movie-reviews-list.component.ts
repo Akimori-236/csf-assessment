@@ -31,6 +31,7 @@ export class MovieReviewsListComponent implements OnInit, OnDestroy {
       }
     )
     this.springboot.search(this.movieName)
+      .then(response => console.debug(response))
   }
 
 }

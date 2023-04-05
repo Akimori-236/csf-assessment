@@ -1,5 +1,8 @@
 package ibf2022.batch1.csf.assessment.server.repositories;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class MovieRepository {
 
 	// TODO: Task 5

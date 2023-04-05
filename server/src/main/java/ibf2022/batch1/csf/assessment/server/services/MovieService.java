@@ -2,8 +2,11 @@ package ibf2022.batch1.csf.assessment.server.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import ibf2022.batch1.csf.assessment.server.models.Review;;
 
+@Service
 public class MovieService {
 
 	// TODO: Task 4
