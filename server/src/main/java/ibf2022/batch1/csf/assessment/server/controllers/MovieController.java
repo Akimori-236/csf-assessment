@@ -2,6 +2,7 @@ package ibf2022.batch1.csf.assessment.server.controllers;
 
 import java.util.List;
 
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -50,10 +51,23 @@ public class MovieController {
 	}
 
 	@PostMapping(path = "/comment", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> saveComment() {
+	public ResponseEntity<Void> insertComment(
+			@RequestParam String movieName,
+			@RequestParam String posterName,
+			@RequestParam Integer rating,
+			@RequestParam String commentText) {
+		// build document
+		Document comment = new Document();
+		comment.put("movieName", movieName);
+		comment.put("posterName", posterName);
+		comment.put("rating", rating);
+		comment.put("commentText", commentText);
+		System.out.println("COMMENT >>> " + comment);
+
+		movieSvc.insertComment(comment);
 		return ResponseEntity
-			.status(HttpStatus.OK)
-			.contentType(MediaType.APPLICATION_JSON)
-			.body("");
+				.status(HttpStatus.CREATED)
+				.contentType(MediaType.APPLICATION_JSON)
+				.body(null);
 	}
 }

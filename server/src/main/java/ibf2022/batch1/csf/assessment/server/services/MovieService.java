@@ -4,6 +4,7 @@ import java.io.StringReader;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -83,5 +84,9 @@ public class MovieService {
 		// retrieve comment count (Task 5)
 		r.setCommentCount(movieRepo.countComments(r.getTitle()));
 		return r;
+	}
+
+	public void insertComment(Document comment) {
+		movieRepo.insertComment(comment);
 	}
 }
