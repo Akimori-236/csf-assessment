@@ -1,1 +1,18 @@
-<p>movie-reviews-list works!</p>
+<div>
+  <div class="row">
+    <h1 class="col">Search Result</h1>
+    <button class="col-1 ms-auto btn btn-outline-danger" type="button" [routerLink]="['/']">
+      Back
+    </button>
+  </div>
+  <div class="row" *ngFor="let review of reviewList">
+    <img class="col-3" [src]="review.image" alt="">
+    <div class="col-9">
+        <h2>{{review.title}} {{review.rating}}</h2>
+        <h3>{{review.headline}}</h3>
+        <h5>{{review.summary}}</h5>
+        <p>Comments:</p>
+        <button class="ms-auto btn btn-outline-primary" type="button">Comment</button>
+    </div>
+  </div>
+</div>

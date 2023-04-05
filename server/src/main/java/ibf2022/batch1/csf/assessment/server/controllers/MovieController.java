@@ -14,11 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ibf2022.batch1.csf.assessment.server.models.Review;
 import ibf2022.batch1.csf.assessment.server.services.MovieService;
+import ibf2022.batch1.csf.assessment.server.utils.MyUtils;
 import jakarta.json.Json;
+import jakarta.json.JsonArrayBuilder;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonObjectBuilder;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/api")
+@RequestMapping(path = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MovieController {
 
 	@Autowired
@@ -26,18 +30,25 @@ public class MovieController {
 
 	@GetMapping(path = "/search")
 	public ResponseEntity<String> Task3SearchReview(@RequestParam String query) {
-
+		// get response
 		List<Review> reviewList = movieSvc.searchReviews(query);
+		// invalid search term return empty
+		if (reviewList.size() == 0) {
+			return ResponseEntity
+					.status(HttpStatus.OK)
+					.contentType(MediaType.APPLICATION_JSON)
+					.body("[]");
+		}
+		// build json
+		List<JsonObject> jList = reviewList.stream()
+				.map(v -> MyUtils.toJson(v))
+				.toList();
 
-		String response = Json.createObjectBuilder()
-				.add("test", "HEY WASSAP")
-				.build()
-				.toString();
-
+		System.out.println(jList.toString());
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.contentType(MediaType.APPLICATION_JSON)
-				.body(response);
+				.body(jList.toString());
 	}
 	// TODO: Task 4, Task 8
 }

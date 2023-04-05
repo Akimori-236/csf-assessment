@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SpringbootDataService } from '../services/springboot-data.service';
+import { Review } from '../models/review';
 
 @Component({
   selector: 'app-movie-reviews-list',
@@ -12,6 +13,7 @@ export class MovieReviewsListComponent implements OnInit, OnDestroy {
 
   queryParams$!: Subscription
   movieName!: string
+  reviewList: Review[] = []
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -19,19 +21,22 @@ export class MovieReviewsListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnDestroy(): void {
-
+    this.queryParams$.unsubscribe()
   }
 
-  ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(
+  async ngOnInit() {
+    this.queryParams$ = this.activatedRoute.queryParams.subscribe(
       (qParams) => {
         this.movieName = qParams['query']
         console.debug("Getting results for.. " + this.movieName
         )
       }
     )
-    this.springboot.search(this.movieName)
-      .then(response => console.debug(response))
+    await this.springboot.search(this.movieName)
+      .then(response => {
+        this.reviewList = response
+        console.debug(response)
+      })
   }
 
 }
